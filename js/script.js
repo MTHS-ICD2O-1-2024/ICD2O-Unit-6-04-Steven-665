@@ -6,22 +6,16 @@
 
 "use strict"
 
-// Setiing the functoin
+// Script to calculate the volume of a sphere using query string parameter "radius"
 window.onload = function () {
   const params = new URLSearchParams(document.location.search)
+  const radius = parseFloat(params.get("radius"))
 
-  // Setting the variables
-  const radius = params.get("radius")
-  console.log(radius)
-
-  // Calculatosion
-  const volume = (4 / 3) * Math.PI * Math.pow(radius, 3)
-  const dimensions =
-    "<ul>\n<li> Volume is " +
-    volume.toFixed(2) + " " + "cm³ " +
-    "</li>\n</ul>"
-
-  // Showing the answer
-  document.getElementById("volume").innerHTML = dimensions
-  "Volume is: " + volume.toFixed(2)
+  // Check if radius is valid
+  if (!isNaN(radius) && radius > 0) {
+    const volume = (4 / 3) * Math.PI * Math.pow(radius, 3)
+    document.getElementById("volume").innerHTML = `Volume is: ${volume.toFixed(2)} cm³`
+  } else {
+    document.getElementById("volume").innerHTML = "Please provide a valid radius using '?radius=' in the URL."
+  }
 }
